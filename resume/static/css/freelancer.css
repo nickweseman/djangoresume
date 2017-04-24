@@ -8,7 +8,6 @@ description
 body {
     font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     overflow-x: hidden;
-    height: 100%; /* had to add this to get jquery scrollspy to work */
 }
 
 p {

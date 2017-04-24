@@ -1,6 +1,15 @@
 {% load staticfiles %}
+<!DOCTYPE html> <!-- had to add this to get jquery scrollspy to work -->
+<html lang="en">
+
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
         <!-- last listed link wins -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
@@ -64,10 +73,12 @@
                         <div class="intro-text">
                             <span class="name">Nick Weseman</span>
                             <div class="col-lg-8 col-lg-offset-2 text-center">
-                                <a class="btn btn-lg btn-title" href="https://github.com/nickweseman">
-                                    <i class="fa fa-github"></i>
-                                    Github
-                                </a>
+                                {% for profile in profiles %}
+                                    <a class="btn btn-lg btn-title" href="{{ profile.url }}">
+                                    <i class="{{ profile.icon }}"></i>
+                                    {{ profile.website }}
+                                    </a>
+                                {% endfor %}
                                 <hr class="star-light">
                                 <span class="skills">Software Engineer</span>
                             </div>
@@ -88,12 +99,12 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <p>Software Engineer in Houston, TX</p>
+                        {% for subject in subjects %}
                             <span class="btn btn-lg btn-tech-title">
-                                Front-End
+                                <i class="{{ subject.icon }}"></i>
+                                {{ subject.name }}
                             </span>
-                            <span class="btn btn-lg btn-tech-title">
-                                Back-End
-                            </span>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -114,15 +125,12 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <span class="btn btn-lg btn-title">
-                            Java
-                        </span>
-                        <span class="btn btn-lg btn-title">
-                            Python
-                        </span>
-                        <span class="btn btn-lg btn-title">
-                            C++
-                        </span>
+                        {% for language in languages %}
+                            <span class="btn btn-lg btn-title">
+                                <i class="{{ language.technology.icon }}"></i>
+                                {{ language.technology.name }}
+                            </span>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="row">
@@ -132,15 +140,12 @@
                 </div>
                  <div class="row">
                     <div class="col-lg-12 text-center">
-                        <span class="btn btn-lg btn-title">
-                            Windows
-                        </span>
-                        <span class="btn btn-lg btn-title">
-                            Linux/Unix
-                        </span>
-                        <span class="btn btn-lg btn-title">
-                            macOS
-                        </span>
+                        {% for operating_system in operating_systems %}
+                            <span class="btn btn-lg btn-title">
+                                <i class="{{ operating_system.icon }}"></i>
+                                {{ operating_system.name }}
+                            </span>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="row">
@@ -150,12 +155,12 @@
                 </div>
                  <div class="row">
                     <div class="col-lg-12 text-center">
-                        <span class="btn btn-lg btn-title">
-                            DoD SECRET Security Clearance
-                        </span>
-                        <span class="btn btn-lg btn-title">
-                            Six Sigma
-                        </span>
+                        {% for certification in certifications %}
+                            <span class="btn btn-lg btn-title">
+                                <i class="{{ certification.icon }}"></i>
+                                {{ certification.name }}
+                            </span>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -169,34 +174,50 @@
                         <hr class="star-primary">
                     </div>
                 </div>
+                {% for experience in experiences %}
                 <div class="row">
-                    <p style='margin-bottom:15px' class="timeline-date">2012 → Present</p>
+                    <p style='margin-bottom:15px' class="timeline-date">{{ experience.years }}</p>
                     <table>
                         <tr>
                             <td class="timeline-image">
                                 <div>
-                                    <img src="{% static 'img/twosigma.png' %}" class="img-responsive img-description" alt="" />
+                                    <a href="{{ experience.url }}">
+                                        <img src="{% static 'img/'|add:experience.icon %}" class="img-responsive img-description" alt="" />
+                                    </a>
                                 </div>
                             </td>
                             <td>
                                 <div>
-                                    <p>Two Sigma is a technology company that applies rigorous scientific based big data approaches to investment management (think Google meets Hedge Fund)</p>
-                                    <li>Serve as team lead for the Accounting & Treasury team dedicated to supporting various back office projects such as Cash Management and Fund Performance Reporting.</li>
-                                    <li>Develop an automatic data import framework using Java, SQL, & Clojure</li>
-                                    <li>Improve custom margin management and portfolio rebalancing system in VBA & SQL</li>
-                                    <li>Design and implement a process to automatically generate quarterly regulatory filings using Java,  JAXB, and XJC (turning a manual process requiring 2 people for 1 week into seconds)</li>
-                                    <span class="btn btn-lg btn-tech">
-                                        Java
-                                    </span>
-                                     <span class="btn btn-lg btn-tech">
-                                        C++
-                                    </span>
+                                    <p>{{ experience.description }}</p>
+                                    <!-- If responsibilities are directly on the Experience -->
+                                    {% for responsibility in experience.responsibilities.all %}
+                                        <li>{{ responsibility.description }}</li>
+                                    {% endfor %}
+                                    {% for technology in experience.technologies.all %}
+                                        <span class="btn btn-lg btn-tech">
+                                            {{ technology.name }}
+                                        </span>
+                                    {% endfor %}
+                                    <!-- If responsibilities are tied to Projects on the Experience -->
+                                    {% for project in experience.projects.all %}
+                                        <h4>{{ project.name }}</h4>
+                                        <p class="small">{{ project.description }}</p>
+                                        {% for responsibility in project.responsibilities.all %}
+                                            <li>{{ responsibility.description }}</li>
+                                        {% endfor %}
+                                        {% for technology in project.technologies.all %}
+                                            <span class="btn btn-lg btn-tech">
+                                                {{ technology.name }}
+                                            </span>
+                                        {% endfor %}
+                                    {% endfor %}
                                 </div>
                             </td>
                         </tr>
                     </table>
                     <hr style='margin-top:15px' />
                 </div>
+                {% endfor %}
             </div>
         </section>
         <!-- Education Section -->
@@ -208,35 +229,33 @@
                         <hr class="star-light">
                     </div>
                 </div>
-                <div class="row">
-                    <p style='margin-bottom:15px' class="timeline-date">2008</p>
-                    <table>
-                        <tr>
-                            <td class="timeline-image">
-                                <div>
-                                    <img src="{% static 'img/uah.png' %}" class="img-responsive img-description" alt="" style='border-radius: 5px;' />
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <p>M.S. in Computer Science</p>
-                                    <p>GPA:  4.0 / 4.0</p>
-                                    <p>Huntsville, AL</p>
-                                     <span class="btn btn-lg btn-outline">
-                                         Java
-                                     </span>
-                                    <span class="btn btn-lg btn-outline">
-                                         C++
-                                     </span>
-                                    <span class="btn btn-lg btn-outline">
-                                         VHDL
-                                     </span>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <hr/>
-                </div>
+                {% for education in educations %}
+                    <div class="row">
+                        <p style='margin-bottom:15px' class="timeline-date">{{ education.graduation_date }}</p>
+                        <table>
+                            <tr>
+                                <td class="timeline-image">
+                                    <div>
+                                        <img src="{% static 'img/'|add:education.icon %}" class="img-responsive img-description" alt="" style='border-radius: 5px;' />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <p>{{ education.degree }}</p>
+                                        <p>GPA:  {{ education.gpa }}</p>
+                                        <p>{{ education.location }}</p>
+                                        {% for technology in education.technologies.all %}
+                                            <span class="btn btn-lg btn-outline">
+                                                {{ technology.name }}
+                                            </span>
+                                        {% endfor %}
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <hr/>
+                    </div>
+                {% endfor %}
             </div>
         </section>
         <!-- Apps/Software Section -->
@@ -310,7 +329,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
         <script src="{% static 'js/freelancer.js' %}"></script>
     </body>
 </html>
