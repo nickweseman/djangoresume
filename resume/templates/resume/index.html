@@ -74,7 +74,7 @@
                             <span class="name">Nick Weseman</span>
                             <div class="col-lg-8 col-lg-offset-2 text-center">
                                 {% for profile in profiles %}
-                                    <a class="btn btn-lg btn-title" href="{{ profile.url }}">
+                                    <a class="btn btn-lg btn-title" target="_blank" href="{{ profile.url }}">
                                     <i class="{{ profile.icon }}"></i>
                                     {{ profile.website }}
                                     </a>
@@ -181,7 +181,7 @@
                         <tr>
                             <td class="timeline-image">
                                 <div>
-                                    <a href="{{ experience.url }}">
+                                    <a target="_blank" href="{{ experience.url }}">
                                         <img src="{% static 'img/'|add:experience.icon %}" class="img-responsive img-description" alt="" />
                                     </a>
                                 </div>
@@ -236,7 +236,9 @@
                             <tr>
                                 <td class="timeline-image">
                                     <div>
-                                        <img src="{% static 'img/'|add:education.icon %}" class="img-responsive img-description" alt="" style='border-radius: 5px;' />
+                                        <a target="_blank" href="{{ education.url }}">
+                                            <img src="{% static 'img/'|add:education.icon %}" class="img-responsive img-description" alt="" style='border-radius: 5px;' />
+                                        </a>
                                     </div>
                                 </td>
                                 <td>
@@ -267,37 +269,41 @@
                         <hr class="star-primary">
                     </div>
                 </div>
-                <div class="row">
-                    <p class="timeline-date">2009 → 2012</p>
-                    <table>
-                        <tr>
-                            <td class="timeline-image">
-                                <div>
-                                    <img src="{% static 'img/rcs.png' %}" class="img-responsive img-description" alt="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <p class="timeline-title-outline">Rocket City Sitters</p>
-                                    <p>
-                                        Rocket City Sitters was a babysitting service that provided experienced, certified sitters with families in the Huntsville, AL area.
-                                    <li>Designed and developed the entire website in HTML, CSS, and PHP.</li>
-                                    </p>
-                                    <span class="btn btn-lg btn-tech">
-                                        HTML
-                                    </span>
-                                    <span class="btn btn-lg btn-tech">
-                                        CSS
-                                    </span>
-                                    <span class="btn btn-lg btn-tech">
-                                        PHP
-                                    </span>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <hr/>
-                </div>
+                {% for software in softwares %}
+                    <div class="row">
+                        <p class="timeline-date">{{ software.date }}</p>
+                        <table>
+                            <tr>
+                                <td class="timeline-image">
+                                    <div>
+                                        {% if software.url %}
+                                            <a target="_blank" href="{{ software.url }}">
+                                        {% endif %}
+                                                <img src="{% static 'img/'|add:software.icon %}" class="img-responsive img-description" alt="" />
+                                        {% if software.url %}
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <p class="timeline-title-outline">{{ software.name }}</p>
+                                        <p>{{ software.description }}</p>
+                                        {% for responsibility in software.responsibilities.all %}
+                                            <li>{{ responsibility.description }}</li>
+                                        {% endfor %}
+                                        {% for technology in software.technologies.all %}
+                                            <span class="btn btn-lg btn-tech">
+                                                {{ technology.name }}
+                                            </span>
+                                        {% endfor %}
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <hr/>
+                    </div>
+                {% endfor %}
             </div>
         </section>
         <!-- Footer -->
@@ -305,12 +311,18 @@
             <div class="footer-below">
                 <div class="container">
                     <div class="row">
-                        <div class="footer-col col-md-8">
-                            Copyright Nick Weseman 2017
-                        </div>
                         <div class="footer-col col-md-4">
                             <i class="fa fa-map-marker"></i>
                             Houston, TX
+                        </div>
+                        <div class="footer-col col-md-4">
+                            Copyright Nick Weseman 2017
+                        </div>
+                        <div class="footer-col col-md-4">
+                            Stack Overflow Profile
+                            <a target="_blank" href="http://stackoverflow.com/users/7906399/nick-weseman">
+                                <img src="http://stackoverflow.com/users/flair/7906399.png?theme=clean" width="208" height="58" alt="profile for Nick Weseman at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Nick Weseman at Stack Overflow, Q&amp;A for professional and enthusiast programmers" style="border-radius:  5px;">
+                            </a>
                         </div>
                     </div>
                 </div>
