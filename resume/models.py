@@ -175,6 +175,7 @@ class Software(SortableMixin):
     description = models.TextField(max_length=500)
     icon = models.CharField(max_length=300, blank=True, null=True)
     url = models.CharField(max_length=500, blank=True, null=True)
+    github_url = models.CharField(max_length=500, blank=True, null=True)
     technologies = models.ManyToManyField(Technology, blank=True)
 
     class Meta:

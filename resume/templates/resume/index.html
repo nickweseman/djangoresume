@@ -75,8 +75,8 @@
                             <div class="col-lg-8 col-lg-offset-2 text-center">
                                 {% for profile in profiles %}
                                     <a class="btn btn-lg btn-title" target="_blank" href="{{ profile.url }}">
-                                    <i class="{{ profile.icon }}"></i>
-                                    {{ profile.website }}
+                                        <i class="{{ profile.icon }}"></i>
+                                        {{ profile.website }}
                                     </a>
                                 {% endfor %}
                                 <hr class="star-light">
@@ -191,7 +191,7 @@
                                     <p>{{ experience.description }}</p>
                                     <!-- If responsibilities are directly on the Experience -->
                                     {% for responsibility in experience.responsibilities.all %}
-                                        <li>{{ responsibility.description }}</li>
+                                        <li>{{ responsibility.description|safe }}</li>
                                     {% endfor %}
                                     {% for technology in experience.technologies.all %}
                                         <span class="btn btn-lg btn-tech">
@@ -203,7 +203,7 @@
                                         <h4>{{ project.name }}</h4>
                                         <p class="small">{{ project.description }}</p>
                                         {% for responsibility in project.responsibilities.all %}
-                                            <li>{{ responsibility.description }}</li>
+                                            <li>{{ responsibility.description|safe }}</li>
                                         {% endfor %}
                                         {% for technology in project.technologies.all %}
                                             <span class="btn btn-lg btn-tech">
@@ -290,8 +290,16 @@
                                         <p class="timeline-title-outline">{{ software.name }}</p>
                                         <p>{{ software.description }}</p>
                                         {% for responsibility in software.responsibilities.all %}
-                                            <li>{{ responsibility.description }}</li>
+                                            <li>{{ responsibility.description|safe }}</li>
                                         {% endfor %}
+                                        {% if software.github_url %}
+                                            <p>
+                                                <a class="btn btn-lg btn-tech" target="_blank" href="{{ software.github_url }}">
+                                                    <i class="fa fa-github"></i>
+                                                    Github
+                                                </a>
+                                            </p>
+                                        {% endif %}
                                         {% for technology in software.technologies.all %}
                                             <span class="btn btn-lg btn-tech">
                                                 {{ technology.name }}
