@@ -44,10 +44,10 @@
                             <a href="#page-top"></a>
                         </li>
                         <li class="page-scroll">
-                            <a href="#about">About</a>
+                            <a href="#about">Areas</a>
                         </li>
                         <li class="page-scroll">
-                            <a href="#technologies">Technical Skills</a>
+                            <a href="#technologies">Skills</a>
                         </li>
                         <li class="page-scroll">
                             <a href="#experience">Experience</a>
@@ -72,7 +72,7 @@
                         <img class="img-responsive" src="{% static 'img/me.png' %}" alt="">
                         <div class="intro-text">
                             <span class="name">Nick Weseman</span>
-                            <div class="col-lg-8 col-lg-offset-2 text-center">
+                            <div class="col-lg-12 text-center">
                                 {% for profile in profiles %}
                                     <a class="btn btn-lg btn-title" target="_blank" href="{{ profile.url }}">
                                         <i class="{{ profile.icon }}"></i>
@@ -92,14 +92,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h2>About</h2>
+                        <h2>Areas of Expertise</h2>
                         <hr class="star-primary">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         {% for subject in subjects %}
-                            <span class="btn btn-lg btn-tech-title">
+                            <span class="btn btn-nocursor btn-lg btn-tech-title">
                                 <i class="{{ subject.icon }}"></i>
                                 {{ subject.name }}
                             </span>
@@ -125,7 +125,7 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         {% for language in languages %}
-                            <span class="btn btn-lg btn-title">
+                        <span class="btn btn-nocursor btn-lg btn-title">
                                 <i class="{{ language.technology.icon }}"></i>
                                 {{ language.technology.name }}
                             </span>
@@ -140,7 +140,7 @@
                  <div class="row">
                     <div class="col-lg-12 text-center">
                         {% for operating_system in operating_systems %}
-                            <span class="btn btn-lg btn-title">
+                        <span class="btn btn-nocursor btn-lg btn-title">
                                 <i class="{{ operating_system.icon }}"></i>
                                 {{ operating_system.name }}
                             </span>
@@ -155,7 +155,7 @@
                  <div class="row">
                     <div class="col-lg-12 text-center">
                         {% for certification in certifications %}
-                            <span class="btn btn-lg btn-title">
+                        <span class="btn btn-nocursor btn-lg btn-title">
                                 <i class="{{ certification.icon }}"></i>
                                 {{ certification.name }}
                             </span>
@@ -175,7 +175,7 @@
                 </div>
                 {% for experience in experiences %}
                 <div class="row">
-                    <p style='margin-bottom:15px' class="timeline-date">{{ experience.years }}</p>
+                    <p class="timeline-date">{{ experience.years }}</p>
                     <table>
                         <tr>
                             <td class="timeline-image">
@@ -187,13 +187,16 @@
                             </td>
                             <td>
                                 <div>
+                                    <h3>{{ experience.company }}</h3>
                                     <p>{{ experience.description }}</p>
                                     <!-- If responsibilities are directly on the Experience -->
-                                    {% for responsibility in experience.responsibilities.all %}
+                                    <ul>
+                                        {% for responsibility in experience.responsibilities.all %}
                                         <li>{{ responsibility.description|safe }}</li>
-                                    {% endfor %}
+                                        {% endfor %}
+                                    </ul>
                                     {% for technology in experience.technologies.all %}
-                                        <span class="btn btn-lg btn-tech">
+                                    <span class="btn btn-nocursor btn-lg btn-tech">
                                             {{ technology.name }}
                                         </span>
                                     {% endfor %}
@@ -201,11 +204,13 @@
                                     {% for project in experience.projects.all %}
                                         <h4>{{ project.name }}</h4>
                                         <p class="small">{{ project.description }}</p>
-                                        {% for responsibility in project.responsibilities.all %}
-                                            <li>{{ responsibility.description|safe }}</li>
-                                        {% endfor %}
+                                        <ul>
+                                            {% for responsibility in project.responsibilities.all %}
+                                                <li>{{ responsibility.description|safe }}</li>
+                                            {% endfor %}
+                                        </ul>
                                         {% for technology in project.technologies.all %}
-                                            <span class="btn btn-lg btn-tech">
+                                        <span class="btn btn-nocursor btn-lg btn-tech">
                                                 {{ technology.name }}
                                             </span>
                                         {% endfor %}
@@ -230,7 +235,7 @@
                 </div>
                 {% for education in educations %}
                     <div class="row">
-                        <p style='margin-bottom:15px' class="timeline-date">{{ education.graduation_date }}</p>
+                        <p class="timeline-date">{{ education.graduation_date }}</p>
                         <table>
                             <tr>
                                 <td class="timeline-image">
@@ -242,11 +247,12 @@
                                 </td>
                                 <td>
                                     <div>
+                                        <h3>{{ education.school }}</h3>
                                         <p>{{ education.degree }}</p>
                                         <p>GPA:  {{ education.gpa }}</p>
                                         <p>{{ education.location }}</p>
                                         {% for technology in education.technologies.all %}
-                                            <span class="btn btn-lg btn-outline">
+                                        <span class="btn btn-nocursor btn-lg btn-outline">
                                                 {{ technology.name }}
                                             </span>
                                         {% endfor %}
@@ -286,11 +292,13 @@
                                 </td>
                                 <td>
                                     <div>
-                                        <p class="timeline-title-outline">{{ software.name }}</p>
+                                        <h3>{{ software.name }}</h3>
                                         <p>{{ software.description }}</p>
-                                        {% for responsibility in software.responsibilities.all %}
-                                            <li>{{ responsibility.description|safe }}</li>
-                                        {% endfor %}
+                                        <ul>
+                                            {% for responsibility in software.responsibilities.all %}
+                                                <li>{{ responsibility.description|safe }}</li>
+                                            {% endfor %}
+                                        </ul> 
                                         {% if software.github_url %}
                                             <p>
                                                 <a class="btn btn-lg btn-tech" target="_blank" href="{{ software.github_url }}">
@@ -300,7 +308,7 @@
                                             </p>
                                         {% endif %}
                                         {% for technology in software.technologies.all %}
-                                            <span class="btn btn-lg btn-tech">
+                                        <span class="btn btn-nocursor btn-lg btn-tech">
                                                 {{ technology.name }}
                                             </span>
                                         {% endfor %}
@@ -318,18 +326,9 @@
             <div class="footer-below">
                 <div class="container">
                     <div class="row">
-                        <div class="footer-col col-md-4">
-                            <i class="fa fa-map-marker"></i>
-                            Houston, TX
-                        </div>
-                        <div class="footer-col col-md-4">
-                            Copyright Nick Weseman 2017
-                        </div>
-                        <div class="footer-col col-md-4">
-                            Stack Overflow Profile
-                            <a target="_blank" href="http://stackoverflow.com/users/7906399/nick-weseman">
-                                <img src="http://stackoverflow.com/users/flair/7906399.png?theme=clean" width="208" height="58" alt="profile for Nick Weseman at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Nick Weseman at Stack Overflow, Q&amp;A for professional and enthusiast programmers" style="border-radius:  5px;">
-                            </a>
+                        <div class="footer-col col-md-12">
+                            <i class="fa fa-copyright"></i> 
+                            Nick Weseman 2017
                         </div>
                     </div>
                 </div>

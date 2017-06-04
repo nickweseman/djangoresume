@@ -365,6 +365,10 @@ footer .footer-below {
     background-color: #233140;
 }
 
+.btn-nocursor {
+    cursor: default;
+}
+
 .btn-tech-title {
     color: #2c3e50;
     font-size: 20px;
@@ -711,6 +715,17 @@ hr {
     margin-right: 15px;
     margin-top: 8px;
     margin-bottom: 5px;
+    /* Probably not needed for clarity, but might change my mind */
+    /* border: solid 1px; */
+}
+
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    /* indent second line of li's */
+   list-style-position: outside; 
 }
 
 .timeline-image {
@@ -757,7 +772,7 @@ hr {
 
 .timeline-date {
     margin-left: 10px;
-    margin-bottom: 0px;
+    margin-bottom: -48px;
 }
 
 .img-description {
@@ -777,3 +792,4 @@ hr {
 .not-visible {
     display: none;
 }
+
