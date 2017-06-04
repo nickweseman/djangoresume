@@ -190,6 +190,15 @@ header .intro-text .skills {
     border-color: #18BC9C;
 }
 
+/* Use Wikipedia link colors */
+a {
+    color: #0645AD;
+}
+
+a:visited { 
+    color: #0B0080; 
+}
+
 @media (min-width: 768px) {
     .navbar-custom {
         padding: 25px 0;

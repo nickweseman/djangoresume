@@ -300,12 +300,11 @@
                                             {% endfor %}
                                         </ul> 
                                         {% if software.github_url %}
-                                            <p>
-                                                <a class="btn btn-lg btn-tech" target="_blank" href="{{ software.github_url }}">
-                                                    <i class="fa fa-github"></i>
-                                                    Github
-                                                </a>
-                                            </p>
+                                            <a target="_blank" href="{{ software.github_url }}">
+                                                <i class="fa fa-github"></i>
+                                                Github
+                                            </a>
+                                            <br>
                                         {% endif %}
                                         {% for technology in software.technologies.all %}
                                         <span class="btn btn-nocursor btn-lg btn-tech">
