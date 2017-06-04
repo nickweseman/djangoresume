@@ -174,12 +174,12 @@
                     </div>
                 </div>
                 {% for experience in experiences %}
-                    <div id="button-{{ experience.id }}" class="minMaxBtn">
+                    <div id="button-experience{{ experience.id }}" class="minMaxBtn">
                         <i class="glyphicon glyphicon-minus"></i>
                     </div>
                     <p class="timeline-date">{{ experience.years }}</p>
                     <h3 class="minimizable">{{ experience.company }}</h3>
-                    <div id="box-{{ experience.id }}" class="row">
+                    <div id="box-experience{{ experience.id }}" class="row">
                         <table>
                             <tr>
                                 <td class="timeline-image">
@@ -222,7 +222,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <hr style='margin-top:15px' />
+                        <hr />
                     </div>
                 {% endfor %}
             </div>
@@ -237,8 +237,12 @@
                     </div>
                 </div>
                 {% for education in educations %}
-                    <div class="row">
-                        <p class="timeline-date">{{ education.graduation_date }}</p>
+                    <div id="button-education{{ education.id }}" class="minMaxBtn">
+                        <i class="glyphicon glyphicon-minus"></i>
+                    </div>
+                    <p class="timeline-date">{{ education.graduation_date }}</p>
+                    <h3 class="minimizable">{{ education.school }}</h3>
+                    <div id="box-education{{ education.id }}" class="row">
                         <table>
                             <tr>
                                 <td class="timeline-image">
@@ -250,7 +254,6 @@
                                 </td>
                                 <td>
                                     <div>
-                                        <h3>{{ education.school }}</h3>
                                         <p>{{ education.degree }}</p>
                                         <p>GPA:  {{ education.gpa }}</p>
                                         <p>{{ education.location }}</p>
@@ -278,8 +281,12 @@
                     </div>
                 </div>
                 {% for software in softwares %}
-                    <div class="row">
-                        <p class="timeline-date">{{ software.date }}</p>
+                    <div id="button-software{{ software.id }}" class="minMaxBtn">
+                        <i class="glyphicon glyphicon-minus"></i>
+                    </div>
+                    <p class="timeline-date">{{ software.date }}</p>
+                    <h3 class="minimizable">{{ software.name }}</h3>
+                    <div id="box-software{{ software.id }}" class="row">
                         <table>
                             <tr>
                                 <td class="timeline-image">
@@ -295,7 +302,6 @@
                                 </td>
                                 <td>
                                     <div>
-                                        <h3>{{ software.name }}</h3>
                                         <p>{{ software.description }}</p>
                                         <ul>
                                             {% for responsibility in software.responsibilities.all %}
