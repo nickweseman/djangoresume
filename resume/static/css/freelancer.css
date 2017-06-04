@@ -18,7 +18,15 @@ p.small {
     font-size: 16px;
 }
 
-a,
+/* Use Wikipedia link colors */
+a {
+    color: #0645AD;
+}
+
+a:visited { 
+    color: #0B0080; 
+}
+
 a:hover,
 a:focus,
 a:active,
@@ -190,14 +198,6 @@ header .intro-text .skills {
     border-color: #18BC9C;
 }
 
-/* Use Wikipedia link colors */
-a {
-    color: #0645AD;
-}
-
-a:visited { 
-    color: #0B0080; 
-}
 
 @media (min-width: 768px) {
     .navbar-custom {
@@ -397,6 +397,7 @@ footer .footer-below {
 .btn-title:active,
 .btn-title.active,
 .btn-title:focus,
+.btn-title:visited,
 .btn-title {
     color: white;
     font-size: 20px;
@@ -802,5 +803,14 @@ ul li {
 
 .not-visible {
     display: none;
+}
+
+h3.minimizable {
+    padding-left:220px;
+}
+
+.minMaxBtn {
+    float:right;
+    cursor:pointer;
 }
 

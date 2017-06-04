@@ -174,53 +174,56 @@
                     </div>
                 </div>
                 {% for experience in experiences %}
-                <div class="row">
+                    <div id="button-{{ experience.id }}" class="minMaxBtn">
+                        <i class="glyphicon glyphicon-minus"></i>
+                    </div>
                     <p class="timeline-date">{{ experience.years }}</p>
-                    <table>
-                        <tr>
-                            <td class="timeline-image">
-                                <div>
-                                    <a target="_blank" href="{{ experience.url }}">
-                                        <img src="{% static 'img/'|add:experience.icon %}" class="img-responsive img-description" alt="" />
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <h3>{{ experience.company }}</h3>
-                                    <p>{{ experience.description }}</p>
-                                    <!-- If responsibilities are directly on the Experience -->
-                                    <ul>
-                                        {% for responsibility in experience.responsibilities.all %}
-                                        <li>{{ responsibility.description|safe }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                    {% for technology in experience.technologies.all %}
-                                    <span class="btn btn-nocursor btn-lg btn-tech">
-                                            {{ technology.name }}
-                                        </span>
-                                    {% endfor %}
-                                    <!-- If responsibilities are tied to Projects on the Experience -->
-                                    {% for project in experience.projects.all %}
-                                        <h4>{{ project.name }}</h4>
-                                        <p class="small">{{ project.description }}</p>
+                    <h3 class="minimizable">{{ experience.company }}</h3>
+                    <div id="box-{{ experience.id }}" class="row">
+                        <table>
+                            <tr>
+                                <td class="timeline-image">
+                                    <div>
+                                        <a target="_blank" href="{{ experience.url }}">
+                                            <img src="{% static 'img/'|add:experience.icon %}" class="img-responsive img-description" alt="" />
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <p>{{ experience.description }}</p>
+                                        <!-- If responsibilities are directly on the Experience -->
                                         <ul>
-                                            {% for responsibility in project.responsibilities.all %}
-                                                <li>{{ responsibility.description|safe }}</li>
+                                            {% for responsibility in experience.responsibilities.all %}
+                                            <li>{{ responsibility.description|safe }}</li>
                                             {% endfor %}
                                         </ul>
-                                        {% for technology in project.technologies.all %}
+                                        {% for technology in experience.technologies.all %}
                                         <span class="btn btn-nocursor btn-lg btn-tech">
                                                 {{ technology.name }}
                                             </span>
                                         {% endfor %}
-                                    {% endfor %}
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <hr style='margin-top:15px' />
-                </div>
+                                        <!-- If responsibilities are tied to Projects on the Experience -->
+                                        {% for project in experience.projects.all %}
+                                            <h4>{{ project.name }}</h4>
+                                            <p class="small">{{ project.description }}</p>
+                                            <ul>
+                                                {% for responsibility in project.responsibilities.all %}
+                                                    <li>{{ responsibility.description|safe }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                            {% for technology in project.technologies.all %}
+                                            <span class="btn btn-nocursor btn-lg btn-tech">
+                                                    {{ technology.name }}
+                                                </span>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <hr style='margin-top:15px' />
+                    </div>
                 {% endfor %}
             </div>
         </section>

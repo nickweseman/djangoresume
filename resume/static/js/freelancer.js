@@ -42,4 +42,23 @@
         });
     });
 
+    // Minimize / Maximize a section when clicked
+    $(".minMaxBtn").click(function(){
+        var icon = $(this).find('i:first');
+        
+        if(icon.attr("class").indexOf("minus") !== -1) {
+           icon.removeClass("glyphicon-minus");
+           icon.addClass("glyphicon-plus");
+        }
+        else {
+            icon.removeClass("glyphicon-plus");
+            icon.addClass("glyphicon-minus");
+        }
+
+        var buttonId = this.id;
+        var boxId = buttonId.substring(buttonId.lastIndexOf('-') + 1);
+
+        $("#box-" + boxId).slideToggle();
+    });
+
 })(jQuery); // End of use strict
