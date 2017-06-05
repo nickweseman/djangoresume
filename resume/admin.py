@@ -2,7 +2,7 @@ from django.contrib import admin
 from adminsortable.admin import SortableAdmin
 
 from .models import Profile, Subject, Language, OperatingSystem, Tool, \
-    Certification, Education, Experience, Technology, Responsibility, Software, Project
+    Certification, Education, Experience, Technology, Responsibility, Software, Project, Contact
 
 
 class MySortableAdminClass(SortableAdmin):
@@ -20,3 +20,5 @@ admin.site.register(Technology, MySortableAdminClass)
 admin.site.register(Responsibility, MySortableAdminClass)
 admin.site.register(Software, MySortableAdminClass)
 admin.site.register(Project, MySortableAdminClass)
+admin.site.register(Contact, MySortableAdminClass)
+

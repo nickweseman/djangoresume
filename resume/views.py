@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from resume.models import Profile, Subject, Language, OperatingSystem, \
-    Tool, Certification, Education, Experience, Project, Technology, Responsibility, Software
+    Tool, Certification, Education, Experience, Project, Technology, Responsibility, Software, Contact
 
 
 def resume(request):
@@ -16,4 +16,5 @@ def resume(request):
                                                  'projects': Project.objects.all(),
                                                  'technologies': Technology.objects.all(),
                                                  'responsibilities': Responsibility.objects.all(),
-                                                 'softwares': Software.objects.all()})
+                                                 'softwares': Software.objects.all(),
+                                                 'contacts': Contact.objects.all()})

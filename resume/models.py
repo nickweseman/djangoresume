@@ -185,3 +185,15 @@ class Software(SortableMixin):
 
     def __str__(self):
         return self.name
+
+class Contact(SortableMixin):
+    email = models.CharField(max_length=300)
+
+    class Meta:
+        ordering = ['the_order']
+
+    the_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+    def __str__(self):
+        return self.email
+
