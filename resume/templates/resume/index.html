@@ -137,6 +137,21 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12 text-center">
+                        <h3>Software</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        {% for tool in tools %}
+                        <span class="btn btn-nocursor btn-lg btn-title">
+                            <i class="{{ tool.icon }}"></i>
+                            {{ tool.name }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
                         <h3>Operating Systems</h3>
                     </div>
                 </div>
