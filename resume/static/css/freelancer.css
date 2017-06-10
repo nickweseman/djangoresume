@@ -805,8 +805,17 @@ ul li {
     display: none;
 }
 
-h3.minimizable {
-    padding-left:220px;
+/* Adjust for smaller screens */
+@media screen and (min-width:750px) {
+    h3.minimizable {
+        padding-left:220px;
+    }
+}
+
+@media screen and (max-width:750px) {
+    h3.minimizable {
+        padding-top:30px;
+    }
 }
 
 .minMaxBtn {
