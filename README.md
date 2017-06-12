@@ -4,6 +4,7 @@
   
 # Conda
 conda create -n resume_env  
+source activate resume_env  
 conda install django  
 pip install django-admin-sortable  
 
